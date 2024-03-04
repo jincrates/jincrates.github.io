@@ -74,7 +74,7 @@
                     <h3 class="mb-0"><a href="https://m.pet-friends.co.kr/">(주)펫프렌즈</a></h3>
                     <div class="subheading mb-3">주문결제팀에서 신규 기능 개발 및 유지보수 담당</div>
                     <p>
-                      현재 근무중 / 내통장결제(헥토파이낸셜) 결제수단 추가 / 주문결제 레거시 코드 개편(node -> java) / 교환반품 신규 기능 개발
+                      현재 근무중 / 주문결제팀 백엔드 개발자로 재직하면서 기존 node 레거시 환경에서 java로 전환을 진행하였으며, 주로 PG 결제에 대한 구조 및 프로세스 설계를 진행하였습니다. 현재는 주문과 결제가 동기적으로 동작하는데, 어떻게 하면 이 둘의 관계를 좀 더 유연하게 비동기적으로 처리할 수 있을까에 대한 고민이 많습니다. 팀내 적극적인 코드리뷰를 진행하며, 팀원들의 의견을 무조건적인 수용보다는 좀 더 나은 방법에 대해서 발전적으로 논의를 진행하고 있습니다. 부가적으로 사내 기술블로그 활성화를 위한 기술블로그 위원장을 겸하며 다른 팀원들의 포스팅을 투고 전에 피드백을 진행하고 있습니다.
                     </p>
                   </div>
                   <div class="flex-shrink-0"><span class="text-primary">2022.10 - 현재</span></div>
@@ -82,7 +82,7 @@
                 <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                   <div class="flex-grow-1">
                     <h3 class="mb-0">교환반품 기능 개발</h3>
-                    <div class="subheading mb-1">모든 국민은 법률이 정하는 바에 의하여 국방의 의무를 진다.</div>
+                    <div class="subheading mb-1">주문 상품에 대한 교환/반품 프로세스 개발</div>
                     <div class="mb-2">
                       <img src="https://img.shields.io/badge/11-JAVA-537E99.svg"/>
                       <img src="https://img.shields.io/badge/2.3.12-SpringBoot-6DB33F.svg"/>
@@ -90,7 +90,8 @@
                       <img src="https://img.shields.io/badge/10.4.30-MariaDB-013545.svg"/>
                     </div>
                     <p>
-                      법률안에 이의가 있을 때에는 대통령은 제1항의 기간내에 이의서를 붙여 국회로 환부하고, 그 재의를 요구할 수 있다. 국회의 폐회중에도 또한 같다. 일반사면을 명하려면 국회의 동의를 얻어야 한다. 국민경제의 발전을 위한 중요정책의 수립에 관하여 대통령의 자문에 응하기 위하여 국민경제자문회의를 둘 수 있다.
+                      신규 기능 개발에 따른 테이블 및 인덱스 설계, 프로세스 설계 진행 / 상품별 수량 단위 접수하도록 처리 / 구매자 귀책에 따른 추가배송비 결제를 위한 결제연동 추가 /
+                      수거송장 및 재배송장 등록시 WMS 연동처리 / 교환반품 상태변경에 따른 카카오톡 알림톡 발송
                     </p>
                   </div>
                   <div class="flex-shrink-0"><span class="text-primary">2023.08 - 2024.02</span></div>
@@ -98,7 +99,7 @@
                 <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                   <div class="flex-grow-1">
                     <h3 class="mb-0">주문결제 마이그레이션(node -> java)</h3>
-                    <div class="subheading mb-1">모든 국민은 법률이 정하는 바에 의하여 국방의 의무를 진다.</div>
+                    <div class="subheading mb-1">기존 Node 10으로 되어 있었던 레거시 환경을 자바로 마이그레이션</div>
                     <div class="mb-2">
                       <img src="https://img.shields.io/badge/10.24.1-NodeJS-69A063.svg"/> →
                       <img src="https://img.shields.io/badge/11-JAVA-537E99.svg"/>
@@ -108,7 +109,7 @@
                       <img src="https://img.shields.io/badge/10.4.30-MariaDB-013545.svg"/>
                     </div>
                     <p>
-                      법률안에 이의가 있을 때에는 대통령은 제1항의 기간내에 이의서를 붙여 국회로 환부하고, 그 재의를 요구할 수 있다. 국회의 폐회중에도 또한 같다. 일반사면을 명하려면 국회의 동의를 얻어야 한다. 국민경제의 발전을 위한 중요정책의 수립에 관하여 대통령의 자문에 응하기 위하여 국민경제자문회의를 둘 수 있다.
+                      주문준비, 주문완료에 대한 API를 JAVA로 이관하면서 불필요한 프로세스를 제거하고 새로운 환경에 맞게 개선 진행 / 주로 결제모듈 관련해서 이관 작업을 진행했으며, 다양한 결제수단을 인터페이스화하여 공통적으로 관리할 수 있도록 개선함 / ngrinder를 통한 주문결제 성능테스트 진행
                     </p>
                   </div>
                   <div class="flex-shrink-0"><span class="text-primary">2023.01 - 2023.07</span></div>
@@ -116,13 +117,13 @@
                 <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                   <div class="flex-grow-1">
                     <h3 class="mb-0">내통장결제(헥토파이낸셜) 주결제수단 추가</h3>
-                    <div class="subheading mb-1">모든 국민은 법률이 정하는 바에 의하여 국방의 의무를 진다.</div>
+                    <div class="subheading mb-1">헥토파이낸셜(구 세틀뱅크) 결제수단 연동작업</div>
                     <div class="mb-2">
                       <img src="https://img.shields.io/badge/10.24.1-NodeJS-69A063.svg"/>
                       <img src="https://img.shields.io/badge/10.4.30-MariaDB-013545.svg"/>
                     </div>
                     <p>
-                      법률안에 이의가 있을 때에는 대통령은 제1항의 기간내에 이의서를 붙여 국회로 환부하고, 그 재의를 요구할 수 있다. 국회의 폐회중에도 또한 같다. 일반사면을 명하려면 국회의 동의를 얻어야 한다. 국민경제의 발전을 위한 중요정책의 수립에 관하여 대통령의 자문에 응하기 위하여 국민경제자문회의를 둘 수 있다.
+                      기존 결제수단으로 존재하던 포트원(구 아임포트), 토스페이와 별도로 새로운 결제수단에 따른 API 분리 / 신규 결제수단에 따른 추가 포인트 적립 진행 / 은행점검 시간에 따른 결제실패시 에러 핸들링 추가
                     </p>
                   </div>
                   <div class="flex-shrink-0"><span class="text-primary">2022.11 - 2022.12</span></div>
@@ -134,7 +135,7 @@
                     <h3 class="mb-0"><a href="http://edenbiz.co.kr/">이든비즈텍(주)</a></h3>
                     <div class="subheading mb-3">제조, 금융/법무, IT/유통 등 약 180여 업체 그룹웨어 추가개발 및 유지보수 담당</div>
                     <p>
-                      2년 2개월 /
+                      2년 2개월 근무 /
                       여러 고객사의 요구사항에 맞게 프로젝트를 기획하고 개발하여 고객사의 만족도를 높임 /
                       개발만큼 중요한 것이 문서화라고 생각하며, 노션을 통하여 회사 내에 개발사항 및 업무 처리현황을 문서화할 수 있도록 사내 시스템 구축
                     </p>
