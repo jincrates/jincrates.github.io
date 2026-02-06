@@ -97,6 +97,7 @@
         navigateTo('/about/');
         break;
 
+
       case '/search':
         if (args) {
           performSearch(args);
