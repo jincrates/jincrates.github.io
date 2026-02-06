@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page.title }} — {{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | truncate: 160 }}" />
+  <meta name="author" content="{{ site.author }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ page.title }}" />
+  <meta property="og:description" content="{{ page.excerpt | strip_html | truncate: 160 }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+
+  <!-- 파비콘 -->
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/img/favicon.ico' | relative_url }}" />
+
+  <!-- JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- 메인 스타일시트 -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+</head>
+<body>
+  <div class="terminal">
+    {% include terminal-frame.html %}
+
+    <main class="terminal__body">
+      <div class="terminal__output" id="terminal-output">
+        <div class="terminal__content">
+
+          <!-- 사용자 커맨드 -->
+          <div class="command-line">
+            <span class="command-line__prompt">&gt;</span>
+            <span class="command-line__text">/read {{ page.slug }}</span>
+          </div>
+
+          <!-- AI 스피너 -->
+          {% include ai-spinner.html %}
+
+          <!-- AI 응답: 글 상세 -->
+          <div class="ai-response ai-response--hidden" id="ai-response"
+               data-greeting="Loading article... Here you go:"
+               data-page-id="{{ page.url }}">
+
+            <div class="ai-greeting" id="ai-greeting">Loading article... Here you go:</div>
+
+            <article class="ai-content" id="ai-content">
+              <!-- 포스트 메타 정보 -->
+              <div class="post-meta">
+                <h1>{{ page.title }}</h1>
+                <span class="post-meta__date">{{ page.date | date: "%Y-%m-%d" }}</span>
+
+                {% if page.tags.size > 0 %}
+                <div class="post-meta__tags">
+                  {% for tag in page.tags %}
+                  <a href="{{ '/posts/?tag=' | append: tag | relative_url }}" class="post-meta__tag">{{ tag }}</a>
+                  {% endfor %}
+                </div>
+                {% endif %}
+              </div>
+
+              <!-- 본문 -->
+              {{ content }}
+
+              <!-- 이전/다음 글 네비게이션 -->
+              <nav class="post-nav" aria-label="Post navigation">
+                {% if page.previous.url %}
+                <div class="post-nav__item">
+                  <span class="post-nav__label">&lt; Previous</span>
+                  <a href="{{ page.previous.url | relative_url }}" class="post-nav__link">{{ page.previous.title }}</a>
+                </div>
+                {% else %}
+                <div class="post-nav__item"></div>
+                {% endif %}
+
+                {% if page.next.url %}
+                <div class="post-nav__item post-nav__item--next">
+                  <span class="post-nav__label">Next &gt;</span>
+                  <a href="{{ page.next.url | relative_url }}" class="post-nav__link">{{ page.next.title }}</a>
+                </div>
+                {% endif %}
+              </nav>
+            </article>
+
+            <!-- Giscus 댓글 (설정 후 활성화) -->
+            <!--
+            <section class="comments-section">
+              <p class="comments-title">💬 Comments</p>
+              <script
+                src="https://giscus.app/client.js"
+                data-repo="jincrates/jincrates.github.io"
+                data-repo-id="YOUR_REPO_ID"
+                data-category="Comments"
+                data-category-id="YOUR_CATEGORY_ID"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="dark_dimmed"
+                data-lang="ko"
+                crossorigin="anonymous"
+                async>
+              </script>
+            </section>
+            -->
+
+          </div>
+        </div>
+      </div>
+
+      {% include command-input.html %}
+    </main>
+  </div>
+
+  <!-- 헬프 오버레이 -->
+  <div class="help-overlay" id="help-overlay" style="display: none;" role="dialog" aria-label="Help">
+    <div class="help-content">
+      <h3 class="help-title">Available Commands</h3>
+      <div class="help-table">
+        <div class="help-row"><span class="help-cmd">/home</span><span class="help-desc">Go to main page</span></div>
+        <div class="help-row"><span class="help-cmd">/posts</span><span class="help-desc">Browse all articles</span></div>
+        <div class="help-row"><span class="help-cmd">/posts --tag &lt;tag&gt;</span><span class="help-desc">Filter posts by tag</span></div>
+        <div class="help-row"><span class="help-cmd">/read &lt;slug&gt;</span><span class="help-desc">Open an article</span></div>
+        <div class="help-row"><span class="help-cmd">/about</span><span class="help-desc">About the developer</span></div>
+        <div class="help-row"><span class="help-cmd">/search &lt;keyword&gt;</span><span class="help-desc">Search articles</span></div>
+        <div class="help-row"><span class="help-cmd">/help</span><span class="help-desc">Show this help</span></div>
+      </div>
+      <p class="help-close">Press <strong>Esc</strong> or click anywhere to close</p>
+    </div>
+  </div>
+
+  <!-- 포스트 데이터 -->
+  <script>
+    window.__POSTS__ = [
+      {% for post in site.posts %}
+      {
+        title: {{ post.title | jsonify }},
+        url: {{ post.url | jsonify }},
+        date: {{ post.date | date: "%Y-%m-%d" | jsonify }},
+        tags: {{ post.tags | jsonify }},
+        categories: {{ post.categories | jsonify }},
+        slug: {{ post.slug | jsonify }},
+        excerpt: {{ post.excerpt | strip_html | truncate: 120 | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+  </script>
+
+  <script src="{{ '/assets/js/spinner.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/typing.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/agent.js' | relative_url }}"></script>
+</body>
+</html>

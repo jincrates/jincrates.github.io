@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page.title | default: site.title }} — {{ site.description }}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}" />
+  <meta name="author" content="{{ site.author }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ page.title | default: site.title }}" />
+  <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+
+  <!-- 파비콘 -->
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/img/favicon.ico' | relative_url }}" />
+
+  <!-- JetBrains Mono 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- 메인 스타일시트 (Jekyll이 SCSS → CSS 컴파일) -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+</head>
+<body>
+  <!-- 터미널 윈도우 전체 래퍼 -->
+  <div class="terminal">
+    {% include terminal-frame.html %}
+
+    <main class="terminal__body">
+      <div class="terminal__output" id="terminal-output">
+        <div class="terminal__content">
+
+          {% if page.command %}
+          <!-- 사용자 커맨드 표시 -->
+          <div class="command-line">
+            <span class="command-line__prompt">&gt;</span>
+            <span class="command-line__text">{{ page.command }}</span>
+          </div>
+          {% endif %}
+
+          <!-- AI 스피너 -->
+          {% include ai-spinner.html %}
+
+          <!-- AI 응답 영역 -->
+          <div class="ai-response ai-response--hidden" id="ai-response"
+               data-greeting="{{ page.ai_greeting | default: '' }}"
+               data-page-id="{{ page.url }}">
+
+            {% if page.ai_greeting %}
+            <div class="ai-greeting" id="ai-greeting">{{ page.ai_greeting }}</div>
+            {% endif %}
+
+            <div class="ai-content" id="ai-content">
+              {{ content }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {% include command-input.html %}
+    </main>
+  </div>
+
+  <!-- 헬프 오버레이 (JS로 동적 생성) -->
+  <div class="help-overlay" id="help-overlay" style="display: none;" role="dialog" aria-label="Help">
+    <div class="help-content">
+      <h3 class="help-title">Available Commands</h3>
+      <div class="help-table">
+        <div class="help-row">
+          <span class="help-cmd">/home</span>
+          <span class="help-desc">Go to main page</span>
+        </div>
+        <div class="help-row">
+          <span class="help-cmd">/posts</span>
+          <span class="help-desc">Browse all articles</span>
+        </div>
+        <div class="help-row">
+          <span class="help-cmd">/posts --tag &lt;tag&gt;</span>
+          <span class="help-desc">Filter posts by tag</span>
+        </div>
+        <div class="help-row">
+          <span class="help-cmd">/posts --category &lt;cat&gt;</span>
+          <span class="help-desc">Filter by category</span>
+        </div>
+        <div class="help-row">
+          <span class="help-cmd">/read &lt;slug&gt;</span>
+          <span class="help-desc">Open an article</span>
+        </div>
+        <div class="help-row">
+          <span class="help-cmd">/about</span>
+          <span class="help-desc">About the developer</span>
+        </div>
+        <div class="help-row">
+          <span class="help-cmd">/search &lt;keyword&gt;</span>
+          <span class="help-desc">Search articles</span>
+        </div>
+        <div class="help-row">
+          <span class="help-cmd">/help</span>
+          <span class="help-desc">Show this help</span>
+        </div>
+      </div>
+      <p class="help-close">Press <strong>Esc</strong> or click anywhere to close</p>
+    </div>
+  </div>
+
+  <!-- 검색용 포스트 데이터 (JS에서 사용) -->
+  <script>
+    window.__POSTS__ = [
+      {% for post in site.posts %}
+      {
+        title: {{ post.title | jsonify }},
+        url: {{ post.url | jsonify }},
+        date: {{ post.date | date: "%Y-%m-%d" | jsonify }},
+        tags: {{ post.tags | jsonify }},
+        categories: {{ post.categories | jsonify }},
+        slug: {{ post.slug | jsonify }},
+        excerpt: {{ post.excerpt | strip_html | truncate: 120 | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+  </script>
+
+  <!-- 핵심 스크립트 -->
+  <script src="{{ '/assets/js/spinner.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/typing.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/agent.js' | relative_url }}"></script>
+</body>
+</html>

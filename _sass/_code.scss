@@ -1,0 +1,110 @@
+// ============================================================
+// 코드블록 & 구문 하이라이팅 — 터미널 다크 테마
+// ============================================================
+
+// 코드 블록 래퍼
+div.highlighter-rouge,
+figure.highlight {
+  margin: 16px 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+// pre 태그
+pre {
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  font-family: $font-mono;
+
+  code {
+    background: none;
+    color: $text-primary;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+  }
+}
+
+// ASCII 배너 전용 pre
+.ascii-banner {
+  background: transparent;
+  border: none;
+  color: $green;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  text-align: center;
+  padding: 16px 0;
+  overflow-x: auto;
+  white-space: pre;
+
+  @media (max-width: $bp-mobile) {
+    font-size: 0.45rem;
+  }
+}
+
+// ============================================================
+// Rouge 구문 하이라이팅 (GitHub Dark 스타일)
+// ============================================================
+
+.highlight {
+  // 주석
+  .c, .c1, .cm, .cs { color: $text-muted; font-style: italic; }
+
+  // 키워드
+  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: $red; }
+
+  // 문자열
+  .s, .s1, .s2, .sb, .sc, .sd, .sh, .sx { color: #a5d6ff; }
+
+  // 숫자
+  .m, .mb, .mf, .mh, .mi, .mo, .mx { color: $cyan; }
+
+  // 함수/메서드명
+  .nf, .nb { color: $purple; }
+
+  // 클래스명
+  .nc, .no { color: $orange; }
+
+  // 연산자
+  .o, .ow { color: $red; }
+
+  // 변수명
+  .n, .na, .ni, .ne, .nn, .nv { color: $text-primary; }
+
+  // 속성명 (HTML/XML)
+  .na { color: $cyan; }
+
+  // 태그명
+  .nt { color: $green; }
+
+  // 정규식
+  .sr { color: $cyan; }
+
+  // 이스케이프 문자
+  .se { color: $orange; }
+
+  // 에러
+  .err { color: $red; }
+
+  // 기타
+  .p { color: $text-primary; }
+  .w { color: $text-primary; }
+}
+
+// 인라인 코드 (콘텐츠 내)
+.ai-content > p > code,
+.ai-content > li > code,
+.ai-content > ul > li > code,
+.ai-content > ol > li > code {
+  background: $bg-tertiary;
+  color: $orange;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}

@@ -1,0 +1,28 @@
+<!-- 터미널 상단 타이틀바 — macOS 윈도우 크롬 -->
+<header class="terminal__header" role="banner">
+  <div class="terminal__buttons" aria-hidden="true">
+    <span class="terminal__btn terminal__btn--close"></span>
+    <span class="terminal__btn terminal__btn--minimize"></span>
+    <span class="terminal__btn terminal__btn--maximize"></span>
+  </div>
+  <div class="terminal__title">
+    <span class="terminal__title-text">AI Agent — blog@jincrates</span>
+  </div>
+  <!-- 모바일 메뉴 토글 -->
+  <button class="terminal__menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+    <span>≡</span>
+  </button>
+</header>
+
+<!-- 네비게이션 바 — 터미널 탭 스타일 -->
+<nav class="terminal__nav" id="terminal-nav" role="navigation" aria-label="Main navigation">
+  <a href="{{ '/' | relative_url }}" class="terminal__nav-item {% if page.url == '/' %}terminal__nav-item--active{% endif %}">
+    /home
+  </a>
+  <a href="{{ '/posts/' | relative_url }}" class="terminal__nav-item {% if page.url contains '/posts' and page.layout != 'post' %}terminal__nav-item--active{% endif %}">
+    /posts
+  </a>
+  <a href="{{ '/about/' | relative_url }}" class="terminal__nav-item {% if page.url == '/about/' %}terminal__nav-item--active{% endif %}">
+    /about
+  </a>
+</nav>

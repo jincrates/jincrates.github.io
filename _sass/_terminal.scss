@@ -1,0 +1,147 @@
+// ============================================================
+// 터미널 프레임 — 윈도우 크롬 + 레이아웃
+// ============================================================
+
+.terminal {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: $bg-primary;
+  overflow: hidden;
+}
+
+// 상단 타이틀바
+.terminal__header {
+  display: flex;
+  align-items: center;
+  height: $header-height;
+  padding: 0 16px;
+  background: $bg-secondary;
+  border-bottom: 1px solid $border-color;
+  flex-shrink: 0;
+  -webkit-app-region: drag; // macOS 느낌
+}
+
+// ● ● ● 윈도우 버튼
+.terminal__buttons {
+  display: flex;
+  gap: 8px;
+  margin-right: 16px;
+}
+
+.terminal__btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+
+  &--close    { background: $btn-close; }
+  &--minimize { background: $btn-minimize; }
+  &--maximize { background: $btn-maximize; }
+}
+
+// 타이틀 텍스트
+.terminal__title {
+  flex: 1;
+  text-align: center;
+}
+
+.terminal__title-text {
+  color: $text-secondary;
+  font-size: 0.8rem;
+}
+
+// 모바일 메뉴 토글
+.terminal__menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: $text-secondary;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+
+  &:hover {
+    color: $text-primary;
+  }
+
+  @media (max-width: $bp-tablet) {
+    display: block;
+  }
+}
+
+// 네비게이션 바
+.terminal__nav {
+  display: flex;
+  align-items: center;
+  height: $nav-height;
+  padding: 0 16px;
+  background: $bg-secondary;
+  border-bottom: 1px solid $border-color;
+  gap: 4px;
+  flex-shrink: 0;
+
+  @media (max-width: $bp-tablet) {
+    display: none;
+    flex-direction: column;
+    height: auto;
+    padding: 8px 16px;
+
+    &.is-open {
+      display: flex;
+    }
+  }
+}
+
+.terminal__nav-item {
+  padding: 4px 12px;
+  border-radius: 4px;
+  color: $text-secondary;
+  font-size: 0.85rem;
+  transition: color 0.2s, background 0.2s;
+
+  &:hover {
+    color: $green;
+    background: $bg-tertiary;
+    text-decoration: none;
+  }
+
+  &--active {
+    color: $green;
+    background: $bg-tertiary;
+  }
+
+  @media (max-width: $bp-tablet) {
+    width: 100%;
+    padding: 8px 12px;
+  }
+}
+
+// 터미널 본문 영역
+.terminal__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+// 출력 영역 (스크롤 가능)
+.terminal__output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  padding-bottom: calc(#{$command-bar-height} + 24px);
+
+  @media (max-width: $bp-mobile) {
+    padding: 16px;
+    padding-bottom: calc(#{$command-bar-height} + 16px);
+  }
+}
+
+// 출력 컨텐츠 최대 폭 제한
+.terminal__content {
+  max-width: $content-max-width;
+  margin: 0 auto;
+}

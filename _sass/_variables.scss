@@ -1,0 +1,48 @@
+// ============================================================
+// 디자인 토큰 — 터미널 다크 테마 컬러 시스템
+// ============================================================
+
+// 배경색 계층
+$bg-primary:   #0d1117;
+$bg-secondary: #161b22;
+$bg-tertiary:  #21262d;
+$bg-input:     #0d1117;
+
+// 텍스트 색상
+$text-primary:   #e6edf3;
+$text-secondary: #8b949e;
+$text-muted:     #484f58;
+
+// 시맨틱 컬러
+$green:  #7ee787;
+$blue:   #58a6ff;
+$yellow: #d29922;
+$red:    #f85149;
+$purple: #d2a8ff;
+$cyan:   #79c0ff;
+$orange: #ffa657;
+
+// UI 컬러
+$border-color:    #30363d;
+$scrollbar-thumb: #484f58;
+$scrollbar-track: #0d1117;
+
+// 타이틀바 버튼
+$btn-close:    #ff5f57;
+$btn-minimize: #febc2e;
+$btn-maximize: #28c840;
+
+// 폰트
+$font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+// 크기
+$terminal-radius: 10px;
+$header-height: 40px;
+$nav-height: 36px;
+$command-bar-height: 56px;
+$content-max-width: 860px;
+
+// 반응형 브레이크포인트
+$bp-mobile:  480px;
+$bp-tablet:  768px;
+$bp-desktop: 1024px;

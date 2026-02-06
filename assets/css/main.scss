@@ -1,0 +1,12 @@
+---
+# Jekyll이 SCSS를 처리하려면 빈 front matter가 필요
+---
+
+// 순서 중요: 변수 → 리셋 → 컴포넌트
+@import "variables";
+@import "reset";
+@import "terminal";
+@import "agent";
+@import "typing";
+@import "code";
+@import "responsive";

@@ -1,0 +1,105 @@
+// ============================================================
+// 반응형 레이아웃 — 모바일 & 태블릿 최적화
+// ============================================================
+
+// 커맨드 입력바 기본 (하단 고정)
+.command-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: $bg-secondary;
+  border-top: 1px solid $border-color;
+  padding: 12px 24px;
+
+  @media (max-width: $bp-mobile) {
+    padding: 10px 16px;
+  }
+}
+
+.command-bar__inner {
+  display: flex;
+  align-items: center;
+  max-width: $content-max-width;
+  margin: 0 auto;
+}
+
+.command-bar__prompt {
+  color: $green;
+  font-weight: 700;
+  margin-right: 8px;
+  font-size: 1rem;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.command-bar__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: $text-primary;
+  font-family: $font-mono;
+  font-size: 0.95rem;
+  caret-color: $green;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+}
+
+// 태블릿 최적화
+@media (max-width: $bp-tablet) {
+  .terminal__header {
+    padding: 0 12px;
+  }
+
+  .terminal__buttons {
+    margin-right: 12px;
+  }
+
+  .terminal__title-text {
+    font-size: 0.75rem;
+  }
+}
+
+// 모바일 최적화
+@media (max-width: $bp-mobile) {
+  .terminal__btn {
+    width: 10px;
+    height: 10px;
+  }
+
+  .terminal__buttons {
+    gap: 6px;
+  }
+
+  .ai-content {
+    padding-left: 0;
+
+    h1 { font-size: 1.3rem; }
+    h2 { font-size: 1.15rem; }
+    h3 { font-size: 1rem; }
+  }
+
+  .ai-greeting {
+    padding-left: 24px;
+  }
+
+  .welcome__text {
+    padding-left: 24px;
+  }
+
+  .welcome__commands {
+    padding-left: 0;
+  }
+
+  .post-meta__tags {
+    gap: 4px;
+  }
+
+  .filter-status {
+    padding-left: 24px;
+  }
+}

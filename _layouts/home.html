@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ site.title }} — {{ site.description }}</title>
+  <meta name="description" content="{{ site.description }}" />
+  <meta name="author" content="{{ site.author }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ site.title }}" />
+  <meta property="og:description" content="{{ site.description }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ site.url }}" />
+
+  <!-- 파비콘 -->
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/img/favicon.ico' | relative_url }}" />
+
+  <!-- JetBrains Mono 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- 메인 스타일시트 -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+</head>
+<body>
+  <div class="terminal">
+    {% include terminal-frame.html %}
+
+    <main class="terminal__body">
+      <div class="terminal__output" id="terminal-output">
+        <div class="terminal__content">
+
+          <!-- ASCII 아트 배너 -->
+          {% include ascii-banner.html %}
+
+          <!-- AI 스피너 (홈 첫 로딩) -->
+          {% include ai-spinner.html %}
+
+          <!-- 환영 메시지 -->
+          <div class="ai-response ai-response--hidden" id="ai-response"
+               data-greeting="Welcome! I'm your AI assistant for this blog."
+               data-page-id="/">
+
+            <section class="welcome">
+              <p class="welcome__text">
+                Welcome! I'm your AI assistant for this blog.
+                Here's what I can help you with:
+              </p>
+
+              <div class="welcome__commands">
+                <div class="welcome__cmd-table">
+                  <div class="welcome__cmd-row">
+                    <a href="{{ '/posts/' | relative_url }}" class="welcome__cmd-name">/posts</a>
+                    <span class="welcome__cmd-desc">Browse all articles</span>
+                  </div>
+                  <div class="welcome__cmd-row">
+                    <span class="welcome__cmd-name">/posts --tag &lt;tag&gt;</span>
+                    <span class="welcome__cmd-desc">Filter posts by tag</span>
+                  </div>
+                  <div class="welcome__cmd-row">
+                    <span class="welcome__cmd-name">/read &lt;slug&gt;</span>
+                    <span class="welcome__cmd-desc">Open an article</span>
+                  </div>
+                  <div class="welcome__cmd-row">
+                    <a href="{{ '/about/' | relative_url }}" class="welcome__cmd-name">/about</a>
+                    <span class="welcome__cmd-desc">About the developer</span>
+                  </div>
+                  <div class="welcome__cmd-row">
+                    <span class="welcome__cmd-name">/search &lt;keyword&gt;</span>
+                    <span class="welcome__cmd-desc">Search articles</span>
+                  </div>
+                  <div class="welcome__cmd-row">
+                    <span class="welcome__cmd-name">/help</span>
+                    <span class="welcome__cmd-desc">Show all available commands</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="welcome__footer">
+                Type a command below to get started, or just click around!
+              </p>
+            </section>
+
+            <!-- 최근 포스트 미리보기 -->
+            {% if site.posts.size > 0 %}
+            <section class="welcome" style="margin-top: 32px;">
+              <p class="welcome__text">
+                Here are the latest articles:
+              </p>
+              <div class="welcome__commands">
+                {% for post in site.posts limit:5 %}
+                <div class="welcome__cmd-row">
+                  <span class="welcome__cmd-desc" style="min-width: 90px;">{{ post.date | date: "%Y-%m-%d" }}</span>
+                  <a href="{{ post.url | relative_url }}" class="welcome__cmd-name" style="min-width: unset;">{{ post.title }}</a>
+                </div>
+                {% endfor %}
+              </div>
+            </section>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+
+      {% include command-input.html %}
+    </main>
+  </div>
+
+  <!-- 헬프 오버레이 -->
+  <div class="help-overlay" id="help-overlay" style="display: none;" role="dialog" aria-label="Help">
+    <div class="help-content">
+      <h3 class="help-title">Available Commands</h3>
+      <div class="help-table">
+        <div class="help-row"><span class="help-cmd">/home</span><span class="help-desc">Go to main page</span></div>
+        <div class="help-row"><span class="help-cmd">/posts</span><span class="help-desc">Browse all articles</span></div>
+        <div class="help-row"><span class="help-cmd">/posts --tag &lt;tag&gt;</span><span class="help-desc">Filter posts by tag</span></div>
+        <div class="help-row"><span class="help-cmd">/read &lt;slug&gt;</span><span class="help-desc">Open an article</span></div>
+        <div class="help-row"><span class="help-cmd">/about</span><span class="help-desc">About the developer</span></div>
+        <div class="help-row"><span class="help-cmd">/search &lt;keyword&gt;</span><span class="help-desc">Search articles</span></div>
+        <div class="help-row"><span class="help-cmd">/help</span><span class="help-desc">Show this help</span></div>
+      </div>
+      <p class="help-close">Press <strong>Esc</strong> or click anywhere to close</p>
+    </div>
+  </div>
+
+  <!-- 포스트 데이터 -->
+  <script>
+    window.__POSTS__ = [
+      {% for post in site.posts %}
+      {
+        title: {{ post.title | jsonify }},
+        url: {{ post.url | jsonify }},
+        date: {{ post.date | date: "%Y-%m-%d" | jsonify }},
+        tags: {{ post.tags | jsonify }},
+        categories: {{ post.categories | jsonify }},
+        slug: {{ post.slug | jsonify }},
+        excerpt: {{ post.excerpt | strip_html | truncate: 120 | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+  </script>
+
+  <script src="{{ '/assets/js/spinner.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/typing.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/agent.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+// ============================================================
+// 타이핑 & 커서 & 스피너 애니메이션
+// ============================================================
+
+// AI 스피너 스타일
+.ai-spinner {
+  display: none; // JS로 제어
+  padding: 8px 0;
+  color: $text-secondary;
+  font-size: 0.9rem;
+}
+
+.ai-spinner__char {
+  color: $green;
+  margin-right: 8px;
+}
+
+.ai-spinner__text {
+  color: $text-muted;
+}
+
+// 커맨드 입력창 커서 깜빡임
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.command-bar__cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background: $green;
+  animation: cursor-blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+// 커맨드 입력창이 포커스 상태일 때 커서 숨김
+.command-bar__input:focus ~ .command-bar__cursor {
+  display: none;
+}
+
+// AI 응답 콘텐츠 초기 숨김 (JS로 표시 제어)
+.ai-response--hidden {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}
+
+// 타이핑 중인 AI 인사말
+.ai-greeting--typing {
+  &::after {
+    content: '▋';
+    animation: cursor-blink 0.8s step-end infinite;
+    color: $green;
+    margin-left: 2px;
+  }
+}
+
+// 페이드인 애니메이션 (타이핑 완료 후 콘텐츠 표시)
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-content--fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+// ASCII 배너 타이핑 효과
+@keyframes banner-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ascii-banner--animate {
+  animation: banner-appear 0.5s ease-out forwards;
+}

@@ -1,0 +1,60 @@
+// ============================================================
+// CSS 리셋 — 브라우저 기본 스타일 초기화
+// ============================================================
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  -webkit-text-size-adjust: 100%;
+
+  @media (max-width: $bp-mobile) {
+    font-size: 13px;
+  }
+}
+
+body {
+  font-family: $font-mono;
+  background: $bg-primary;
+  color: $text-primary;
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+a {
+  color: $blue;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul, ol {
+  list-style-position: inside;
+}
+
+// 스크롤바 커스텀 (웹킷)
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $scrollbar-track;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $scrollbar-thumb;
+  border-radius: 4px;
+}

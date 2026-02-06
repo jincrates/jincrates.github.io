@@ -1,0 +1,51 @@
+# ============================================================
+# Jekyll 기본 설정 — AI CLI Agent Blog
+# ============================================================
+
+title: "Jincrates"
+description: "Backend Developer Blog — AI CLI Agent"
+url: "https://jincrates.github.io"
+baseurl: ""
+author: "Jincrates"
+github_username: jincrates
+
+# 빌드 설정
+markdown: kramdown
+highlighter: rouge
+permalink: /posts/:title/
+
+# SASS 설정
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# kramdown 설정 (코드 하이라이팅)
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# 기본 레이아웃 설정
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: "pages"
+      type: "pages"
+    values:
+      layout: "default"
+
+# 빌드 제외 목록
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .idea
+  - .claude
+  - .DS_Store
+  - node_modules

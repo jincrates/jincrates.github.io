@@ -1,0 +1,44 @@
+---
+layout: default
+title: Posts
+permalink: /posts/
+command: /posts
+ai_greeting: "Here are all the posts:"
+---
+
+<p style="color: #8b949e; margin-bottom: 16px;">Found {{ site.posts | size }} post(s).</p>
+
+<!-- 필터 상태 (JS에서 업데이트) -->
+<div class="filter-status" id="filter-status" style="display: none;"></div>
+
+{% if site.posts.size > 0 %}
+<div class="post-list">
+  <!-- 헤더 -->
+  <div class="post-list__header">
+    <span>Date</span>
+    <span class="post-list__col--tag">Tag</span>
+    <span>Title</span>
+  </div>
+
+  <!-- 포스트 목록 -->
+  {% for post in site.posts %}
+  <div class="post-list__item"
+       data-tags="{{ post.tags | join: ',' | downcase }}"
+       data-categories="{{ post.categories | join: ',' | downcase }}">
+    <span class="post-list__date">{{ post.date | date: "%Y-%m-%d" }}</span>
+    <span class="post-list__tag">
+      {% if post.tags.size > 0 %}
+      <span class="post-list__tag-badge">{{ post.tags | first }}</span>
+      {% endif %}
+    </span>
+    <a href="{{ post.url | relative_url }}" class="post-list__title">{{ post.title }}</a>
+  </div>
+  {% endfor %}
+</div>
+
+<p class="post-list__hint">
+  Type <code>/read &lt;slug&gt;</code> to open an article, or click a title above.
+</p>
+{% else %}
+<p class="no-results">No posts yet. Check back soon!</p>
+{% endif %}
