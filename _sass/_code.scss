@@ -10,9 +10,22 @@ figure.highlight {
   overflow: hidden;
 }
 
+// One Dark 컬러 팔레트
+$od-bg:       #282c34;
+$od-fg:       #abb2bf;
+$od-comment:  #5c6370;
+$od-red:      #e06c75;
+$od-green:    #98c379;
+$od-yellow:   #e5c07b;
+$od-blue:     #61afef;
+$od-purple:   #c678dd;
+$od-cyan:     #56b6c2;
+$od-orange:   #d19a66;
+$od-gutter:   #636d83;
+
 // pre 태그
 pre {
-  background: $bg-secondary;
+  background: $od-bg;
   border: 1px solid $border-color;
   border-radius: 6px;
   padding: 16px;
@@ -23,7 +36,7 @@ pre {
 
   code {
     background: none;
-    color: $text-primary;
+    color: $od-fg;
     padding: 0;
     border-radius: 0;
     font-size: inherit;
@@ -49,52 +62,68 @@ pre {
 }
 
 // ============================================================
-// Rouge 구문 하이라이팅 (GitHub Dark 스타일)
+// Rouge 구문 하이라이팅 (One Dark 테마)
 // ============================================================
 
 .highlight {
-  // 주석
-  .c, .c1, .cm, .cs { color: $text-muted; font-style: italic; }
+  background: $od-bg;
 
-  // 키워드
-  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: $red; }
+  // 주석
+  .c, .c1, .cm, .cs, .ch { color: $od-comment; font-style: italic; }
+
+  // 키워드 (public, class, return, if, else ...)
+  .k, .kd, .kn, .kp, .kr { color: $od-purple; }
+  .kc { color: $od-orange; }  // true, false, null
+  .kt { color: $od-yellow; }  // 타입 (int, String, void ...)
 
   // 문자열
-  .s, .s1, .s2, .sb, .sc, .sd, .sh, .sx { color: #a5d6ff; }
+  .s, .s1, .s2, .sb, .sc, .sh, .sx, .dl { color: $od-green; }
+  .sd { color: $od-comment; font-style: italic; } // docstring
 
   // 숫자
-  .m, .mb, .mf, .mh, .mi, .mo, .mx { color: $cyan; }
+  .m, .mb, .mf, .mh, .mi, .mo, .mx, .il { color: $od-orange; }
 
   // 함수/메서드명
-  .nf, .nb { color: $purple; }
+  .nf, .fm { color: $od-blue; }
+  .nb { color: $od-cyan; }    // 빌트인 함수
 
-  // 클래스명
-  .nc, .no { color: $orange; }
+  // 클래스명, 상수
+  .nc { color: $od-yellow; }
+  .no { color: $od-orange; }
 
   // 연산자
-  .o, .ow { color: $red; }
+  .o, .ow { color: $od-cyan; }
 
   // 변수명
-  .n, .na, .ni, .ne, .nn, .nv { color: $text-primary; }
+  .n  { color: $od-fg; }
+  .ni { color: $od-fg; }
+  .ne { color: $od-yellow; }  // 예외 클래스
+  .nn { color: $od-fg; }      // 네임스페이스
+  .nv, .vi, .vg, .vc { color: $od-red; }  // 변수
 
-  // 속성명 (HTML/XML)
-  .na { color: $cyan; }
+  // 속성명 (HTML attr, 어노테이션)
+  .na { color: $od-orange; }
 
-  // 태그명
-  .nt { color: $green; }
+  // 태그명 (HTML/XML)
+  .nt { color: $od-red; }
 
   // 정규식
-  .sr { color: $cyan; }
+  .sr { color: $od-green; }
 
   // 이스케이프 문자
-  .se { color: $orange; }
+  .se { color: $od-cyan; }
 
   // 에러
-  .err { color: $red; }
+  .err { color: $od-red; background: none; }
 
   // 기타
-  .p { color: $text-primary; }
-  .w { color: $text-primary; }
+  .p  { color: $od-fg; }
+  .w  { color: $od-fg; }
+  .ge { font-style: italic; }         // 이탤릭 강조
+  .gs { font-weight: 700; }           // 볼드 강조
+  .gd { color: $od-red; }             // diff 삭제
+  .gi { color: $od-green; }           // diff 추가
+  .gl { color: $od-comment; }         // diff 라인번호
 }
 
 // 인라인 코드 (콘텐츠 내)
