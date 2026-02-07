@@ -3,6 +3,10 @@
 터미널에서 AI CLI 에이전트를 사용하는 것 같은 인터랙티브 기술 블로그.
 Jekyll + GitHub Pages 기반.
 
+**Demo**: [jincrates.github.io](https://jincrates.github.io)
+
+![screenshot](assets/img/screenshot.png)
+
 ## Quick Start
 
 ```bash
@@ -23,7 +27,7 @@ bundle exec jekyll serve
 | `/posts --tag <tag>` | 태그 필터링 |
 | `/posts --category <cat>` | 카테고리 필터 |
 | `/read <slug>` | 글 상세 페이지 |
-| `/about` | 소개 페이지 |
+| `/about` | 소개 페이지 (경력/프로젝트 포함) |
 | `/search <keyword>` | 검색 |
 | `/help` | 커맨드 목록 |
 
